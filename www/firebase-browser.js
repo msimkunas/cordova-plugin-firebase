@@ -76,6 +76,12 @@ exports.setUserId = function(id, success, error) {
     }
 };
 
+exports.setAnalyticsCollectionEnabled = function(enabled, success, error) {
+    if (typeof success === 'function') {
+        success();
+    }
+};
+
 exports.setUserProperty = function(name, value, success, error) {
     if (typeof success === 'function') {
         success();

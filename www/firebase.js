@@ -63,6 +63,10 @@ exports.setUserId = function(id, success, error) {
     exec(success, error, "FirebasePlugin", "setUserId", [id]);
 };
 
+exports.setAnalyticsCollectionEnabled = function(enabled, success, error) {
+    exec(success, error, "FirebasePlugin", "setAnalyticsCollectionEnabled", [enabled]);
+};
+
 exports.setUserProperty = function(name, value, success, error) {
     exec(success, error, "FirebasePlugin", "setUserProperty", [name, value]);
 };

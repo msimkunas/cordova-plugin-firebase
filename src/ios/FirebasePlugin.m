@@ -300,6 +300,17 @@ CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStat
     }];
 }
 
+- (void)setAnalyticsCollectionEnabled:(CDVInvokedUrlCommand *)command {
+    [self.commandDelegate runInBackground:^{
+        BOOL enabled = [command.arguments objectAtIndex:0];
+        
+        [[FIRAnalyticsConfiguration sharedInstance] setAnalyticsCollectionEnabled:enabled];
+        
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
+}
+
 - (void)setUserProperty:(CDVInvokedUrlCommand *)command {
     [self.commandDelegate runInBackground:^{
         NSString* name = [command.arguments objectAtIndex:0];

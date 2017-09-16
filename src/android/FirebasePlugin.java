@@ -121,6 +121,9 @@ public class FirebasePlugin extends CordovaPlugin {
         } else if (action.equals("setUserId")) {
             this.setUserId(callbackContext, args.getString(0));
             return true;
+        } else if (action.equals("setAnalyticsCollectionEnabled")) {
+            this.setAnalyticsCollectionEnabled(callbackContext, args.getString(0));
+            return true;
         } else if (action.equals("setUserProperty")) {
             this.setUserProperty(callbackContext, args.getString(0), args.getString(1));
             return true;
@@ -436,6 +439,19 @@ public class FirebasePlugin extends CordovaPlugin {
             public void run() {
                 try {
                     mFirebaseAnalytics.setUserId(id);
+                    callbackContext.success();
+                } catch (Exception e) {
+                    callbackContext.error(e.getMessage());
+                }
+            }
+        });
+    }
+
+    private void setAnalyticsCollectionEnabled(final CallbackContext callbackContext, final boolean enabled) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                try {
+                    mFirebaseAnalytics.setAnalyticsCollectionEnabled(enabled);
                     callbackContext.success();
                 } catch (Exception e) {
                     callbackContext.error(e.getMessage());
